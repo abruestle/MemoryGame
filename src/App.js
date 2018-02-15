@@ -5,6 +5,8 @@ import Title from "./components/Title";
 import Comment from "./components/Comment";
 import "./App.css";
 import API from "./utils/API.js";
+import successComments from "./successComments.json";
+
 
 class App extends Component {
   // Setting this.state.friends to the friends json array
@@ -112,7 +114,7 @@ class App extends Component {
       this.setState({points: this.state.points + 1});
       //set comment
 
-      const comment = "You chose the right pup! Good human!";
+      const comment = successComments[Math.floor(Math.random()* successComments.length)];
       this.setState({comment: comment});
       //Shuffle Array
       this.shuffleArray(this.state.cards, this.state.cardsSelected);

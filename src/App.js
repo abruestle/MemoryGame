@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import GameCard from "./components/GameCard";
-import Wrapper from "./components/Wrapper";
+//import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import Comment from "./components/Comment";
 import "./App.css";
 import API from "./utils/API.js";
 import successComments from "./successComments.json";
+import Alert from "./components/Alert";
+import Col from "./components/Col";
+import Row from "./components/Row";
+import Container from "./components/Container";
+// import SearchForm from "../components/SearchForm";
+// import SearchResults from "../components/SearchResults";
 
 
 class App extends Component {
@@ -16,7 +22,7 @@ class App extends Component {
     points: 0,
     breed: "",
     comment: "Select a pupper to start...but don't select the same one twice!",
-    number: 20,
+    number: 18,
     error: ""
   };
 
@@ -131,11 +137,19 @@ class App extends Component {
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
     return (
-      <Wrapper>
-        <Title>Memory Game</Title>
-        <Comment>{this.state.comment}</Comment>
+
+      <Container style={{ minHeight: "80%" }}>
+        <Title title="Dog Memory Game" comment={this.state.comment} />
         <Comment>Score: {this.state.points}</Comment>
+        <Alert
+          type="danger"
+          style={{ opacity: this.state.error ? 1 : 0, marginBottom: 10 }}
+        >
+          {this.state.error}
+        </Alert>
+      <Row>
         {this.state.cards.map((card, index) => (
+        <Col size="md-2">
           <GameCard
             id={index}
             key={index}
@@ -143,8 +157,11 @@ class App extends Component {
             breed={this.state.breed}
             selectCard={this.selectCard}
           />
+        </Col>
         ))}
-      </Wrapper>
+      </Row>
+      </Container>
+      
     );
   }
 }
